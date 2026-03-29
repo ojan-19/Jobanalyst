@@ -3,10 +3,20 @@ import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
+import {fetchFirstTester} from './services/testService'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [test, setTest]= useState<string>('d')
 
+  const testing =async()=>{
+    try {
+      const data= await fetchFirstTester()
+      setTest(data)
+    }
+    catch (err){
+      setTest("error {err}")
+    }
+  }
   return (
     <>
       <section id="center">
@@ -23,9 +33,9 @@ function App() {
         </div>
         <button
           className="counter"
-          onClick={() => setCount((count) => count + 1)}
+          onClick={() => testing()}
         >
-          Count is {count}
+          Count is {test}
         </button>
       </section>
 
@@ -81,7 +91,7 @@ function App() {
                 >
                   <use href="/icons.svg#discord-icon"></use>
                 </svg>
-                Discord
+                Discordd
               </a>
             </li>
             <li>
